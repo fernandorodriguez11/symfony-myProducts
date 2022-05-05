@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Productos {{controller_name}}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{asset('js/idcantidades.js')}}"></script>
+{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 900px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+</style>
+
+{{ parent() }}
+{% if mensaje == 'Exitoso' %}
+    <div id="mensajito" class="success">
+        <span>Producto añadido correctamente</span>
+    </div>
+    <input type="hidden" id="usuario" value="{{usuario}}">
+    <script>
+        var usuario = $("#usuario").val();
+        Push.create("Producto añadido",{
+            body: "El usuario "+usuario+" ha añadio productos a la cesta"
+        });
+</script>
+    <script>
+        setTimeout(function(){
+            $("#mensajito").fadeIn(800);
+            $("#mensajito").fadeOut(2500);
+        },3000);
+
+        setTimeout(function(){
+            window.location = 'http://localhost/misProductos/public/index.php/cocina';
+        },3000)
+        
+    </script>
+{% endif %}
+<div class="example-wrapper">
+
+    <div class="titulo">
+        <h1> {{ controller_name }}</h1>
+    </div>
+
+    {% if productos_cocina != null %}
+        <div class="contenedor">
+            {% for producto in productos_cocina %}
+            <form method="post" action="addToCart">
+                <div class="contenedor__productos">
+                    <div class="contenedor__productos__imagen">
+                        <figure>
+                            <img src="{{asset('uploads/photos/'~ producto.fotoproducto)}}" alt="imagen del producto {{producto.nombre}}" >
+                            <figcaption > {{ producto.nombre }} </figcaption>
+                        </figure> 
+                    </div>
+                    <div class="contenedor__productos__noImagen">
+                        <div class="contenedor__productos__noImagen__textos">
+                            <p>Tienda: <span class="tienda">{{ producto.tienda }} </span></p> 
+                            <p>Tipo:  <span class="tienda">{{ producto.tipoproducto }}</span></p>
+                        </div>
+                        <div class="contenedor__productos__noImagen__cantidad">
+                            <div class="indecrementador">
+                                <button id="d{{producto.id}}" onclick="decrementar('c{{producto.id}}')" type="button" class="boton decrementador"><span>-</span></button>
+                                <input type="text" id="c{{producto.id}}" name="cantidad{{producto.id}}" class="cantidades" value="1" min="1" max="100">
+                                <button id="i{{producto.id}}" onclick="incrementar('c{{producto.id}}')" type="button" class="boton incrementador"><span>+</span></button>
+                            </div>
+                        </div>
+                        <div class="contenedor__productos__noImagen__carrito">
+                            
+                                <input type="number" name="id" value="{{producto.id}}" style="display: none">
+                                <button type="submit" name="submit" value="cocina"><span id="p{{producto.id}}"></span></button>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="noProducts">No hay productos insertados en {{controller_name}} </div>
+    {% endif %}
+</div>
+
+{% endblock %}

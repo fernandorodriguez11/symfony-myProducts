@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{controller_name}}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{asset('js/seleccion.js')}}"></script>
+{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 900px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+{{ parent() }}
+
+<form method="post" action="updateCart">
+    <div class="example-wrapper">
+
+        <div class="cesta">
+            {% for producto in cesta %}
+                <div class="cesta__productos">
+                    <!-- Capa flotante que se pone arriba de la etiqueta para mostrar que usuario lo ha solicitado -->
+                    <div class="cesta__productos__solicitante">
+                        <span>Solicitado por {{ producto.username }}</span>
+                    </div>
+                    <!-- Capa que pone la imagen y el nombre del producto en el lado izquierdo de la etiqueta -->
+                    <div class="cesta__productos__imagen">
+                        <figure>
+                            <img src="{{asset('uploads/photos/'~ producto.fotoproducto)}}" alt="imagen del producto {{producto.nombre}}" >
+                            <figcaption > {{ producto.nombre }} </figcaption>
+                        </figure> 
+                    </div>
+                    <!-- Datos del producto, donde se compra, la cantidad solicitada, si esta comprado o no. -->
+                    <div class="cesta__productos__noImagen">
+                        <div class="cesta__productos__noImagen__textos">
+                            <p>Tienda: <span class="tienda">{{ producto.tienda }} </span></p> 
+                            <p>Cantidad: <span class="cantidad">{{ producto.cantidad }}</span></p>
+                            <div class="botones">
+                                {% if producto.comprado == 0 %} 
+                                    <a id="seleccion{{producto.id}}" onclick="seleccionar('{{producto.id}}')" class="comprar">Comprar</a>
+                                {% elseif producto.comprado == 1 %}
+                                    <a class="comprado">Comprado</a>
+                                {% endif %}
+                                <a id="delete{{producto.id}}" href="delete/{{producto.id}}">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+        <!-- Capa que contiene el paginado de la web -->
+        <div class="navigation">
+            {{ knp_pagination_render(cesta) }}
+        </div>
+
+    </div>
+    <!-- He puesto el botón de elementos comprados en el footer-->
+    <footer id="pie">
+        <input type="submit" name="comprar" value="COMPRAR" >
+    </footer>
+</form>
+{% endblock %}

@@ -1,0 +1,162 @@
+.cesta {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.cesta__productos {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  flex-direction: row;
+  margin: 10% 0;
+  border: 1px solid black;
+  box-shadow: 0px 0px 20px black;
+  padding: 2%;
+  background: white;
+  position: relative;
+}
+.cesta__productos__solicitante {
+  width: 50%;
+  text-align: center;
+  position: absolute;
+  top: -25px;
+  left: -10px;
+  z-index: 2;
+  color: white;
+  background: #BBCEE2;
+  border-radius: 10px 0px 0px 10px;
+}
+.cesta__productos__solicitante span {
+  font-size: 2em;
+}
+.cesta__productos__imagen {
+  width: 55%;
+}
+.cesta__productos__imagen figure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cesta__productos__imagen figure img {
+  width: 100%;
+  height: 100%;
+}
+.cesta__productos__imagen figure figcaption {
+  width: 100%;
+  position: absolute;
+  background: black;
+  color: white;
+  text-align: center;
+  bottom: 0;
+  font-weight: bold;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 20px;
+}
+.cesta__productos__noImagen {
+  width: 45%;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.cesta__productos__noImagen__textos {
+  width: 100%;
+  height: 100%;
+  /*.comprado::before
+  *  font-family: 'icomoon'
+  *  content: '\e912'*/
+}
+.cesta__productos__noImagen__textos p {
+  font-size: 1.6em;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  font-weight: bolder;
+  margin-bottom: 5%;
+  margin-top: 3%;
+}
+.cesta__productos__noImagen__textos p span {
+  font-size: 27px;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+.cesta__productos__noImagen__textos p .cantidad {
+  padding-left: 5%;
+  font-size: 33px;
+}
+.cesta__productos__noImagen__textos .botones {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15%;
+}
+.cesta__productos__noImagen__textos .botones a {
+  width: 100%;
+  margin: 7% 0;
+  text-align: center;
+  padding: 4% 0;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: white;
+}
+.cesta__productos__noImagen__textos .botones a:last-child {
+  background: red;
+  border: 1px solid red;
+}
+.cesta__productos__noImagen__textos .botones .comprar {
+  background: #FFB35E;
+  border: 1px solid #FFB35E;
+  cursor: pointer;
+}
+.cesta__productos__noImagen__textos .botones .comprado {
+  background: #6BCF90;
+  border: 1px solid #6BCF90;
+}
+
+.navigation .pagination {
+  float: right;
+  margin-bottom: 5%;
+  font-size: 1.5em;
+}
+
+footer {
+  width: 100%;
+  height: 150px;
+  position: fixed;
+  bottom: -150px;
+  background: black;
+  z-index: 999;
+}
+footer input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  font-size: 5em;
+  color: white;
+}
+
+.aparecer {
+  bottom: 0;
+  animation: aparecer 0.5s linear;
+}
+
+.desaparecer {
+  bottom: -150px;
+  animation: desaparecer 0.5s linear;
+}
+
+@keyframes aparecer {
+  from {
+    bottom: -150px;
+  }
+  to {
+    bottom: 0;
+  }
+}
+@keyframes desaparecer {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: -150px;
+  }
+}

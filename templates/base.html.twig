@@ -2,18 +2,51 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="author" content="Fernando Rodríguez de Tembleque Jiménez">
+        <meta name="owner" content="Fernando Rodríguez de Tembleque Jiménez">
+        <meta name="description" content="Desarrollo web profesional, moderno y con buen estilo.">
+        <meta name="keywords" content="Desarrollo web, programacion">
+        <meta name="robots" content="index, follow">
+        <title>{% block title %}{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/iconos.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/utils/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
         {% block javascripts %}
+            <script src="{{asset('js/jquery.min.js')}}"></script>
+            <script src="{{asset('js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('js/push.min.js')}}"></script>
+            <script src="{{asset('js/menu.js')}}"></script>
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <header class="cabecera">
+                <div class="cabecera__titulo">
+                    <h1>Mis Productos</h1>
+                </div> 
+                <nav class="cabecera__menu">
+                    <ul class="cabecera__menu__lista">
+                        <li id="home"><a class="" href="{{ path('home') }}">Cesta</a></li>
+                        <li id="insertar"><a class="" href="{{ path('productos') }}">Insertar</a></li>
+                        <li id="productos"><a href="#" class="productos">Productos</a>
+                            <ul class="sublista">
+                                <li id="cocina" class="interno"><a class="" href="{{ path('cocina') }}">Cocina</a></li>
+                                <li id="lavabo" class="interno" ><a class="" href="{{ path('lavabo') }}">Baño</a></li>
+                                <li id="casa" class="interno" ><a class="" href="{{ path('casa') }}">Casa</a></li>
+                            </ul>
+                        </li>
+                        <li id="salir"><a class="salir" href="{{ path('app_logout') }}">Salir </a></li>
+                    </ul>
+                </nav>
+            </header>
+        {% endblock %}
     </body>
 </html>

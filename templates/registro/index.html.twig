@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Usuario{% endblock %}
+
+{% block body %}
+
+<div class="registro_usuario">
+
+    <div class="registro_usuario__titulo">
+        <h1> {{ titulo_vista }}</h1>
+    </div>
+
+    <div class="capa_mensaje">
+        <p> {{ mensaje }} </p>
+    </div>
+
+    <div class="registro_usuario__formulario "><!--class="registro_usuario__formulario container h-100"-->
+        <!--<div class="row h-100 justify-content-center align-items-center">
+            <div class="col-6 bg-white rounded my-3 p-5">-->
+            <div class="capa_formulario">
+                {{ form_start(formulario, {attr: {autocomplete: "off"}}) }}
+
+                    <div class="capas_inputs">
+                        {{ form_row(formulario.username, {attr:{'class': '', autocomplete: 'off',placeholder: 'pepito1234'}})}}
+                    </div>
+
+                    <div class="capas_inputs">
+                        {{ form_row(formulario.email, {attr:{'class': '', autocomplete: 'off',placeholder: 'example@gmail.com'}})}}
+                    </div>
+
+                    <div class="capas_inputs">
+                        {{ form_row(formulario.password, {attr:{'class': '', autocomplete: 'off',placeholder: 'password *****'}})}}
+                    </div>
+
+                    <div class="capa_boton">
+                        {{ form_row(formulario.registrar, {label: 'Registrar Usuario', attr:{'class': ''}})}}
+                    </div>
+
+                {{ form_end(formulario) }}
+            </div>
+       <!-- </div>-->
+    </div>
+
+</div>
+{% endblock %}
